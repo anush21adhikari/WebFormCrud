@@ -94,74 +94,6 @@ namespace WebFormDemoProject
         }
 
 
-        //protected void btnUpdate_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-
-        //        String User = Convert.ToString(Session["UserName"]);
-
-        //        if (string.IsNullOrWhiteSpace(txtFirstName.Text) || string.IsNullOrWhiteSpace(txtLastName.Text) || string.IsNullOrWhiteSpace(txtUsername.Text)
-        //                  || string.IsNullOrWhiteSpace(ddlGender.Text) || string.IsNullOrWhiteSpace(txtEmail.Text)
-        //                  || string.IsNullOrWhiteSpace(txtPhone.Text))
-        //        {
-
-        //            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>AlertErrorMessage();</script>", false);
-        //            return;
-        //        }
-
-
-        //        using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnString"].ToString()))
-        //        {
-        //            connection.Open();
-
-        //            using (SqlCommand command = new SqlCommand("sp_UserRegistration", connection))
-        //            {
-        //                command.CommandType = CommandType.StoredProcedure;
-        //                command.Parameters.AddWithValue("@flag", "update");
-        //                command.Parameters.AddWithValue("@firstName", txtFirstName.Text.Replace("'", "`").Replace("&", "And"));
-        //                command.Parameters.AddWithValue("@lastName", txtFirstName.Text.Replace("'", "`").Replace("&", "And"));
-        //                command.Parameters.AddWithValue("@userName", txtUsername.Text.Replace("'", "`").Replace("&", "And"));
-        //                command.Parameters.AddWithValue("@gender", ddlGender.Text);
-        //                command.Parameters.AddWithValue("@address", txtAddress.Text);
-        //                command.Parameters.AddWithValue("@password", txtPassword.Text);
-        //                command.Parameters.AddWithValue("@phone", txtPhone.Text);
-        //                command.Parameters.AddWithValue("@email", txtEmail.Text);
-        //                command.Parameters.AddWithValue("@createdBy", User);
-        //                command.Parameters.AddWithValue("@isActive", ddlIsActive.Text);
-        //                command.Parameters.AddWithValue("@userID", hdnUserID.Value);
-
-
-        //                SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
-        //                DataTable dataTable = new DataTable();
-        //                dataAdapter.Fill(dataTable);
-        //                string errorCode = dataTable.Rows[0]["errorCode"].ToString();
-        //                string message = dataTable.Rows[0]["msg"].ToString();
-        //                if (errorCode == "1")
-        //                {
-        //                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>showErrorMessage('" + message + "');</script>", false);
-        //                }
-        //                else if (errorCode == "0")
-        //                {
-        //                    Session["SuccessMessage"] = message;
-
-        //                    Response.Redirect("UserList.aspx");
-
-        //                }
-        //            }
-        //        }
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        string exception = ex.Message;
-        //        var message = new JavaScriptSerializer().Serialize(ex.Message.ToString());
-        //        var alert = string.Format("alert({0});", message);
-        //        System.Web.UI.ScriptManager.RegisterStartupScript(this, this.GetType(), "message", alert, true);
-        //    }
-        //}
-
-
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
             try
@@ -190,7 +122,7 @@ namespace WebFormDemoProject
                         command.Parameters.AddWithValue("@userName", txtUsername.Text.Replace("'", "`").Replace("&", "And"));
                         command.Parameters.AddWithValue("@gender", ddlGender.Text);
                         command.Parameters.AddWithValue("@address", txtAddress.Text);
-                        command.Parameters.AddWithValue("@password", txtPassword.Text);
+                        command.Parameters.AddWithValue("@password", PasswordHelper.HashPassword(txtPassword.Text));
                         command.Parameters.AddWithValue("@phone", txtPhone.Text);
                         command.Parameters.AddWithValue("@email", txtEmail.Text);
                         command.Parameters.AddWithValue("@createdBy", User);

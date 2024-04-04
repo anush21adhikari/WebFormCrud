@@ -6,6 +6,7 @@
         <ContentTemplate>
             <div>
                   <h1>Welcome to the Dashboard!</h1>
+                  <a href="UserList.aspx" class="btn btn-primary">Manage User</a>
               
             </div>
       
